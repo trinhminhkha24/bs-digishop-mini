@@ -1,0 +1,93 @@
+@model DigiShop.Models.Product
+@{
+    ViewData["Title"] = "Thêm sản phẩm";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Thêm sản phẩm mới</h2>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Tên sản phẩm</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Mô tả</label>
+                <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Price" class="control-label">Giá</label>
+                        <input asp-for="Price" class="form-control" type="number" step="0.01" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="SalePrice" class="control-label">Giá khuyến mãi</label>
+                        <input asp-for="SalePrice" class="form-control" type="number" step="0.01" />
+                        <span asp-validation-for="SalePrice" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="ImageUrl" class="control-label">Đường dẫn hình ảnh</label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                <small class="form-text text-muted">Ví dụ: /assets/img/product.jpg</small>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label">Danh mục</label>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId">
+                    <option value="">-- Chọn danh mục --</option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsNewProduct" /> @Html.DisplayNameFor(model => model.IsNewProduct) (Hiển thị trong sản phẩm mới)
+                    </label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsOnSale" /> @Html.DisplayNameFor(model => model.IsOnSale) (Hiển thị trong sản phẩm khuyến mãi)
+                    </label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-save"></span> Lưu
+                </button>
+                <a asp-action="Index" class="btn btn-default">
+                    <span class="glyphicon glyphicon-chevron-left"></span> Quay lại
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

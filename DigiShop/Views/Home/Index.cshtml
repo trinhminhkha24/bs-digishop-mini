@@ -1,0 +1,187 @@
+﻿@model DigiShop.ViewModels.HomeViewModel
+@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="well well-lg offer-box text-center">
+            Ưu đãi hôm nay: &nbsp; <span class="glyphicon glyphicon-cog"></span>&nbsp;Giảm giá 40% cho đơn hàng từ 2,000,000đ trở lên!
+        </div>
+        
+        <!-- Slider section would go here - using categories instead -->
+        <div class="main box-border">
+            <h3>Danh mục sản phẩm</h3>
+            <div class="row">
+                @foreach (var category in Model.Categories.Take(4))
+                {
+                    <div class="col-md-3 col-sm-6">
+                        <div class="thumbnail">
+                            <a asp-controller="Product" asp-action="Category" asp-route-id="@category.Id">
+                                <h4>@category.Name</h4>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <br />
+    </div>
+    <!-- /.col -->
+    
+    <div class="col-md-3 text-center">
+        <div class="col-md-12 col-sm-6 col-xs-6">
+            <div class="offer-text">
+                Giảm giá 30%
+            </div>
+            <div class="thumbnail product-box">
+                <img src="~/assets/img/dummyimg.png" alt="" />
+                <div class="caption">
+                    <h3><a href="#">Sản phẩm hot</a></h3>
+                    <p><a href="#">Khuyến mãi đặc biệt</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-6 col-xs-6">
+            <div class="offer-text2">
+                Miễn phí ship
+            </div>
+            <div class="thumbnail product-box">
+                <img src="~/assets/img/dummyimg.png" alt="" />
+                <div class="caption">
+                    <h3><a href="#">Giao hàng nhanh</a></h3>
+                    <p><a href="#">Đơn hàng từ 500k</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+    <div class="col-md-3">
+        <div>
+            <a href="#" class="list-group-item active">Danh mục sản phẩm</a>
+            <ul class="list-group">
+                @foreach (var category in Model.Categories)
+                {
+                    <li class="list-group-item">
+                        <a asp-controller="Product" asp-action="Category" asp-route-id="@category.Id">
+                            @category.Name
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+        <!-- /.div -->
+        <div class="well well-lg offer-box offer-colors">
+            <span class="glyphicon glyphicon-star-empty"></span>Giảm giá 25%
+            <br />
+            <br />
+            <div class="progress progress-striped">
+                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+                     style="width: 70%">
+                    <span class="sr-only">70% Complete (success)</span>
+                    Còn 2 giờ 35 phút
+                </div>
+            </div>
+            <a href="#">Xem chi tiết</a>
+        </div>
+        <!-- /.div -->
+    </div>
+    <!-- /.col -->
+    
+    <div class="col-md-9">
+        <div>
+            <ol class="breadcrumb">
+                <li><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                <li class="active">Sản phẩm mới nhất</li>
+            </ol>
+        </div>
+        <!-- /.div -->
+        
+        <h3>Sản phẩm mới nhất</h3>
+        <div class="row">
+            @if (Model.NewProducts.Any())
+            {
+                @foreach (var product in Model.NewProducts)
+                {
+                    <div class="col-md-4 text-center col-sm-6 col-xs-6">
+                        <div class="thumbnail product-box">
+                            <img src="@(string.IsNullOrEmpty(product.ImageUrl) ? "/assets/img/dummyimg.png" : product.ImageUrl)" alt="@product.Name" />
+                            <div class="caption">
+                                <h3><a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id">@product.Name</a></h3>
+                                <p>Giá: <strong>@(product.Price?.ToString("N0")) đ</strong></p>
+                                <p>@(product.Description != null && product.Description.Length > 50 ? product.Description.Substring(0, 50) : product.Description ?? "")</p>
+                                <p>
+                                    <form asp-controller="Cart" asp-action="AddToCart" method="post" style="display:inline;">
+                                        <input type="hidden" name="productId" value="@product.Id" />
+                                        <input type="hidden" name="quantity" value="1" />
+                                        <button type="submit" class="btn btn-success">Thêm vào giỏ</button>
+                                    </form>
+                                    <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id" class="btn btn-primary">Xem chi tiết</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-md-12">
+                    <p>Chưa có sản phẩm mới.</p>
+                </div>
+            }
+        </div>
+        <!-- /.row -->
+        
+        <div>
+            <ol class="breadcrumb">
+                <li><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                <li class="active">Sản phẩm khuyến mãi</li>
+            </ol>
+        </div>
+        <!-- /.div -->
+        
+        <h3>Sản phẩm khuyến mãi</h3>
+        <div class="row">
+            @if (Model.SaleProducts.Any())
+            {
+                @foreach (var product in Model.SaleProducts)
+                {
+                    <div class="col-md-4 text-center col-sm-6 col-xs-6">
+                        <div class="thumbnail product-box">
+                            <img src="@(string.IsNullOrEmpty(product.ImageUrl) ? "/assets/img/dummyimg.png" : product.ImageUrl)" alt="@product.Name" />
+                            <div class="caption">
+                                <h3><a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id">@product.Name</a></h3>
+                                <p>
+                                    Giá gốc: <strong style="text-decoration: line-through;">@(product.Price?.ToString("N0")) đ</strong><br />
+                                    Giá KM: <strong class="text-danger">@(product.SalePrice?.ToString("N0")) đ</strong>
+                                </p>
+                                <p>@(product.Description != null && product.Description.Length > 50 ? product.Description.Substring(0, 50) : product.Description ?? "")</p>
+                                <p>
+                                    <form asp-controller="Cart" asp-action="AddToCart" method="post" style="display:inline;">
+                                        <input type="hidden" name="productId" value="@product.Id" />
+                                        <input type="hidden" name="quantity" value="1" />
+                                        <button type="submit" class="btn btn-success">Thêm vào giỏ</button>
+                                    </form>
+                                    <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id" class="btn btn-primary">Xem chi tiết</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-md-12">
+                    <p>Chưa có sản phẩm khuyến mãi.</p>
+                </div>
+            }
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->

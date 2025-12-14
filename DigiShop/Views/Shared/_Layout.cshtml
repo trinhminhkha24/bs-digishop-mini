@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>@ViewData["Title"] - DIGI Shop mini</title>
+    <!-- Bootstrap core CSS -->
+    <link href="~/assets/css/bootstrap.css" rel="stylesheet">
+    <!-- Fontawesome core CSS -->
+    <link href="~/assets/css/font-awesome.min.css" rel="stylesheet" />
+    <!--GOOGLE FONT -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <!--Slide Show Css -->
+    <link href="~/assets/ItemSlider/css/main-style.css" rel="stylesheet" />
+    <!-- custom CSS here -->
+    <link href="~/assets/css/style.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index"><strong>DIGI</strong> Shop</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a asp-controller="Cart" asp-action="Index">Giỏ hàng</a></li>
+                    <partial name="_LoginPartial" />
+                    <li><a asp-area="Admin" asp-controller="Categories" asp-action="Index">Quản lý</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    
+    <div class="container">
+        @RenderBody()
+    </div>
+    <!-- /.container -->
+    
+    <!--Footer -->
+    <div class="col-md-12 footer-box">
+        <div class="row">
+            <div class="col-md-4">
+                <strong>DIGI Shop</strong>
+                <hr>
+                <p>
+                    Cửa hàng điện tử trực tuyến<br />
+                    Email: info@digishop.com<br>
+                </p>
+                2024 www.digishop.com | All Right Reserved
+            </div>
+            <div class="col-md-4">
+                <strong>Liên kết nhanh</strong>
+                <hr>
+                <p>
+                    <a asp-controller="Home" asp-action="Index">Trang chủ</a><br />
+                    <a asp-controller="Home" asp-action="Privacy">Chính sách</a><br />
+                </p>
+            </div>
+            <div class="col-md-4 social-box">
+                <strong>Mạng xã hội</strong>
+                <hr>
+                <a href="#"><i class="fa fa-facebook-square fa-3x "></i></a>
+                <a href="#"><i class="fa fa-twitter-square fa-3x "></i></a>
+                <a href="#"><i class="fa fa-google-plus-square fa-3x c"></i></a>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <!-- /.col -->
+    <div class="col-md-12 end-box ">
+        &copy; 2024 | &nbsp; All Rights Reserved | &nbsp; DIGI Shop
+    </div>
+    <!-- /.col -->
+    <!--Footer end -->
+    
+    <!--Core JavaScript file  -->
+    <script src="~/assets/js/jquery-1.10.2.js"></script>
+    <!--bootstrap JavaScript file  -->
+    <script src="~/assets/js/bootstrap.js"></script>
+    <!--Slider JavaScript file  -->
+    <script src="~/assets/ItemSlider/js/modernizr.custom.63321.js"></script>
+    <script src="~/assets/ItemSlider/js/jquery.catslider.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
