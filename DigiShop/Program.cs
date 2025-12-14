@@ -37,7 +37,7 @@ using (var scope = app.Services.CreateScope())
     {
         var context = services.GetRequiredService<AppDBContext>();
         var userManager = services.GetRequiredService<UserManager<AppUser>>();
-        await DbInitializer.Initialize(context, userManager);
+        DbInitializer.Initialize(context, userManager).Wait();
     }
     catch (Exception ex)
     {
