@@ -1,0 +1,45 @@
+@model DigiShop.Models.Product
+@{
+    ViewData["Title"] = "Xóa sản phẩm";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Xóa sản phẩm</h2>
+        <hr />
+        <div class="alert alert-danger">
+            <h4>Bạn có chắc chắn muốn xóa sản phẩm này?</h4>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <dl class="dl-horizontal">
+            <dt>Tên sản phẩm</dt>
+            <dd>@Model.Name</dd>
+            
+            <dt>Mô tả</dt>
+            <dd>@Model.Description</dd>
+            
+            <dt>Giá</dt>
+            <dd>@(Model.Price?.ToString("N0")) đ</dd>
+            
+            <dt>Giá khuyến mãi</dt>
+            <dd>@(Model.SalePrice?.ToString("N0")) đ</dd>
+            
+            <dt>Danh mục</dt>
+            <dd>@Model.Category?.Name</dd>
+        </dl>
+        
+        <form asp-action="Delete" method="post">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">
+                <span class="glyphicon glyphicon-trash"></span> Xóa
+            </button>
+            <a asp-action="Index" class="btn btn-default">
+                <span class="glyphicon glyphicon-chevron-left"></span> Quay lại
+            </a>
+        </form>
+    </div>
+</div>
