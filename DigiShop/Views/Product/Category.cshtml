@@ -44,7 +44,7 @@
                         {
                             <p>Giá: <strong>@(product.Price?.ToString("N0")) đ</strong></p>
                         }
-                        <p>@(product.Description?.Substring(0, Math.Min(50, product.Description.Length ?? 0)) ?? "")</p>
+                        <p>@(product.Description != null && product.Description.Length > 50 ? product.Description.Substring(0, 50) : product.Description ?? "")</p>
                         <p>
                             <form asp-controller="Cart" asp-action="AddToCart" method="post" style="display:inline;">
                                 <input type="hidden" name="productId" value="@product.Id" />
